@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeshChat Pro | النظام الآمن للاتصالات</title>
+    <title>MeshChat Pro | النظام اللامركزي الآمن A+</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -20,113 +20,135 @@
             justify-content: center;
             align-items: center;
         }
-        .chat-container {
+        .app-container {
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             height: 100vh;
             background: #111b21;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
         @media (min-width: 768px) {
-            .chat-container {
-                height: 90vh;
+            .app-container {
+                height: 92vh;
                 border-radius: 12px;
                 overflow: hidden;
             }
         }
-        /* الهيدر */
-        .chat-header {
+        /* الهيدر العلوي */
+        .app-header {
             background: #202c33;
-            padding: 15px 20px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid #222d34;
         }
-        .user-info h2 {
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00a884 0%, #005c4b 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
             font-size: 1.1rem;
+        }
+        .info h3 {
+            font-size: 1rem;
             color: #f1f1f2;
         }
-        .user-info span {
-            font-size: 0.8rem;
+        .info span {
+            font-size: 0.75rem;
             color: #00a884;
         }
-        .security-badge {
+        .security-shield {
             background: rgba(0, 168, 132, 0.15);
             color: #00a884;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
+            border: 1px solid rgba(0, 168, 132, 0.3);
         }
         /* منطقة الرسائل */
-        .chat-messages {
+        .chat-body {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            background: #0b141a;
+            background-color: #0b141a;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
-        .message {
-            max-width: 70%;
+        .message-bubble {
+            max-width: 75%;
             padding: 10px 14px;
             border-radius: 8px;
             font-size: 0.95rem;
             position: relative;
             word-wrap: break-word;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
-        .message.incoming {
+        .message-bubble.incoming {
             background: #202c33;
             align-self: flex-start;
             border-top-left-radius: 0;
         }
-        .message.outgoing {
+        .message-bubble.outgoing {
             background: #005c4b;
             align-self: flex-end;
             border-top-right-radius: 0;
         }
-        .message .time {
-            font-size: 0.7rem;
+        .message-bubble .time {
+            font-size: 0.65rem;
             color: rgba(255,255,255,0.6);
             float: left;
-            margin-top: 5px;
-            margin-right: 10px;
+            margin-top: 6px;
+            margin-left: 8px;
         }
-        /* شريط الإدخال */
-        .chat-input-area {
+        /* شريط التحكم السفلي */
+        .chat-footer {
             background: #202c33;
             padding: 10px 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            border-top: 1px solid #222d34;
         }
-        .chat-input-area input {
+        .chat-footer input[type="text"] {
             flex: 1;
             background: #2a3942;
             border: none;
-            padding: 12px 15px;
+            padding: 12px 16px;
             border-radius: 8px;
             color: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
         }
-        .action-btn {
+        .tool-btn {
             background: none;
             border: none;
             color: #8696a0;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            padding: 8px;
+            padding: 6px;
             transition: color 0.3s;
         }
-        .action-btn:hover {
+        .tool-btn:hover {
             color: #00a884;
         }
-        .send-btn {
+        .send-action-btn {
             background: #00a884;
             color: white;
             border: none;
@@ -137,93 +159,94 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
-        .send-btn:hover {
+        .send-action-btn:hover {
             background: #01755f;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="chat-container">
+    <div class="app-container">
         <!-- الهيدر -->
-        <div class="chat-header">
-            <div class="user-info">
-                <h2>MeshChat Pro 🌐</h2>
-                <span>متصل بالشبكة اللامركزية</span>
+        <div class="app-header">
+            <div class="profile-section">
+                <div class="avatar">M</div>
+                <div class="info">
+                    <h3>MeshChat Pro (Ultra)</h3>
+                    <span>متصل • تشفير تـام A+</span>
+                </div>
             </div>
-            <div class="security-badge">🔒 أمان تام A+</div>
+            <div class="security-shield">🔒 أمان لامركزي</div>
         </div>
 
-        <!-- صندوق الرسائل -->
-        <div class="chat-messages" id="messageBox">
-            <div class="message incoming">
-                أهلاً بك! تم تأمين الاتصال بنجاح. ابدأ بإرسال رسالتك الأولى الآن.
+        <!-- صندوق المحادثة -->
+        <div class="chat-body" id="chatBody">
+            <div class="message-bubble incoming">
+                مرحباً بك في الشبكة اللامركزية المتقدمة! النظام يعمل بأعلى معايير الأمان السيبراني. يمكنك كتابة الرسائل أو رفع الوسائط الآن.
                 <span class="time">09:30 ص</span>
             </div>
         </div>
 
         <!-- شريط الإدخال والوسائط -->
-        <div class="chat-input-area">
-            <label class="action-btn" title="إرسال صورة أو فيديو">
-                📎 <input type="file" id="mediaInput" style="display: none;" accept="image/*,video/*">
+        <div class="chat-footer">
+            <label class="tool-btn" title="إرفاق صورة أو فيديو">
+                📎 <input type="file" id="mediaFile" style="display: none;" accept="image/*,video/*">
             </label>
-            <button class="action-btn" id="voiceBtn" title="تسجيل صوتي">🎤</button>
-            <input type="text" id="messageInput" placeholder="اكتب رسالة مشفرة..." autofocus>
-            <button class="send-btn" id="sendBtn">➤</button>
+            <button class="tool-btn" id="voiceRecordBtn" title="تسجيل صوتي">🎤</button>
+            <input type="text" id="userInput" placeholder="اكتب رسالة مشفرة..." autofocus>
+            <button class="send-action-btn" id="sendBtn">➤</button>
         </div>
     </div>
 
     <script>
-        const messageBox = document.getElementById('messageBox');
-        const messageInput = document.getElementById('messageInput');
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
-        const mediaInput = document.getElementById('mediaInput');
-        const voiceBtn = document.getElementById('voiceBtn');
+        const mediaFile = document.getElementById('mediaFile');
+        const voiceRecordBtn = document.getElementById('voiceRecordBtn');
 
-        function appendMessage(text, type = 'outgoing') {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `message ${type}`;
+        function addMessage(text, senderType = 'outgoing') {
+            const bubble = document.createElement('div');
+            bubble.className = `message-bubble ${senderType}`;
             
-            const now = new Date();
-            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-            msgDiv.innerHTML = `${text} <span class="time">${timeString}</span>`;
-            messageBox.appendChild(msgDiv);
-            messageBox.scrollTop = messageBox.scrollHeight;
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            bubble.innerHTML = `${text} <span class="time">${timeStr}</span>`;
+            
+            chatBody.appendChild(bubble);
+            chatBody.scrollTop = chatBody.scrollHeight;
         }
 
         sendBtn.addEventListener('click', () => {
-            const text = messageInput.value.trim();
+            const text = userInput.value.trim();
             if (text !== '') {
-                appendMessage(text, 'outgoing');
-                messageInput.value = '';
+                addMessage(text, 'outgoing');
+                userInput.value = '';
                 
-                // محاكاة استجابة من السيرفر اللامركزي
+                // محاكاة استجابة الشبكة الذكية
                 setTimeout(() => {
-                    appendMessage('تم استلام رسالتك وتشفيرها بنجاح عبر الشبكة اللامركزية 🚀', 'incoming');
+                    addMessage('تم معالجة وتشفير رسالتك بنجاح عبر عقد MeshChat الأمنية ⚡', 'incoming');
                 }, 1000);
             }
         });
 
-        messageInput.addEventListener('keypress', (e) => {
+        userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 sendBtn.click();
             }
         });
 
-        // محاكاة إرسال الصور والفيديوهات
-        mediaInput.addEventListener('change', (e) => {
+        mediaFile.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                appendMessage(`📁 تم إرسال ملف الوسائط: ${file.name}`, 'outgoing');
+                addMessage(`📁 تم إرسال ملف الوسائط بنجاح: ${file.name}`, 'outgoing');
             }
         });
 
-        // محاكاة تسجيل الفويسات
-        voiceBtn.addEventListener('click', () => {
-            appendMessage('🎤 [رسالة صوتية مشفرة - 0:04 ثوانٍ]', 'outgoing');
+        voiceRecordBtn.addEventListener('click', () => {
+            addMessage('🎤 [تسجيل صوتي مشفر - مدة الفويس: 0:05 ثانية]', 'outgoing');
         });
     </script>
 
