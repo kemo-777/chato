@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeshChat | النظام اللامركزي الآمن</title>
+    <!-- استيراد خطوط وتصميمات عصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+        .badge {
+            background: rgba(124, 58, 237, 0.15);
+            color: #a78bfa;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.6);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+            width: 100%;
+        }
+        .feature-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: right;
+        }
+        .feature-card h3 {
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .feature-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="badge">🚀 الجيل القادم من الاتصالات اللامركزية</div>
+        <h1>MeshChat</h1>
+        <p>تواصل آمن، مشفر بالكامل، وبدون الحاجة لإنترنت تقليدي. نظام شبكات ميدانية متطور يعتمد على تقنية العقد المباشرة.</p>
+        
+        <div class="btn-group">
+            <a href="https://github.com/kemo-777/chato" target="_blank" class="btn">تحميل المشروع والمصادر</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>🔒 تشفير تام</h3>
+                <p>حماية بياناتك ورسائلك بأحدث خوارزميات التشفير المتقدمة.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ أداء فائق</h3>
+                <p>مبني باستخدام تقنيات Async و TCP Sockets لسرعة استجابة لحظية.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌐 لامركزي بالكامل</h3>
+                <p>يعمل في الظروف الصعبة وبدون الاعتماد على سيرفرات مركزية تقليدية.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
